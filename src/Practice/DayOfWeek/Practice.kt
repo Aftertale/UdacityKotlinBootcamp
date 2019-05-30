@@ -1,4 +1,4 @@
-package UdacityPractice
+package Practice.DayOfWeek
 
 import java.util.*
 
