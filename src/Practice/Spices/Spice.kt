@@ -1,12 +1,16 @@
 package Practice.Spices
 
+import java.awt.Color
+import java.awt.Color.YELLOW
+
 fun main(args: Array<String>) {
-    val curry = Curry(name="yellow curry", `spiciness = "mild")
-    println(curry.name)
-    println(curry.color)
+    val spiceCabinet = listOf(SpiceContainer(Curry("yellow curry", "mild")),
+        SpiceContainer(Curry("red curry", "medium")),
+        SpiceContainer(Curry("green curry", "hot")))
+    for(element in spiceCabinet) println(element.label)
 }
 
-abstract class Spice (val name: String, val spiciness: String = "mild", color: SpiceColor) : SpiceColor by color {
+sealed class Spice (val name: String, val spiciness: String = "mild", color: SpiceColor) : SpiceColor by color {
     abstract fun prepareSpice()
 }
 
@@ -22,9 +26,14 @@ interface Grinder{
 }
 
 interface SpiceColor {
-    val color: String
+    val color: Color
 }
 
 object YellowSpiceColor : SpiceColor {
-    override val color = "yellow"
+    override val color: Color = Color.YELLOW
 }
+
+data class SpiceContainer (var spice: Spice){
+    val label = spice.name
+}
+
